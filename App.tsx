@@ -1,21 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack';
+import Colors from './constants/colors'
+import StartGame from './screens/StartGame/StartGame'
+
+type RootStackParamList = {
+  StartGame: undefined;
+  GameOver: undefined;
+  GameScreen: undefined;
+};
+
+const RootStack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <RootStack.Navigator>
+      <RootStack.Screen 
+        name="StartGame" 
+        component={StartGame} 
+        options={{
+          title:"Advinhe o Número",
+          headerStyle: {
+            backgroundColor: Colors.primary,
+            height:70,
+          },
+          headerTitleStyle: {
+            alignSelf:"center",
+            fontWeight:"bold"
+          },
+        }}
+      />
+      </RootStack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
